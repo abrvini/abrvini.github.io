@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listas</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css"> -->
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -27,9 +26,9 @@
                     <div class="headerGrupo">
                         <span class="btnNovoGrupo" v-if="!compras.novoGrupo"
                             v-on:click="compras.novoGrupo=true">+</span>
-                            <div  v-on:click="compras.selected=!compras.selected;">
-                        {{compras.descricao}} <span class="total">R$ {{totalGrupos(compras).toFixed(2)}}</span>
-                    </div>
+                        <div v-on:click="compras.selected=!compras.selected;">
+                            {{compras.descricao}} <span class="total">R$ {{totalGrupos(compras).toFixed(2)}}</span>
+                        </div>
                     </div>
                     <span v-if="compras.novoGrupo">
                         <label>Novo grupo:</label>
@@ -39,17 +38,17 @@
                             class="button is-danger">Cancelar</button>
                     </span>
                     <!--  -->
-                    <ul v-if="(compras.selected && !compras.novoGrupo)" v-for="(grupo,idxGrupo) in compras.grupos" style="margin:10px 0px; cursor: pointer;">
+                    <ul v-if="(compras.selected && !compras.novoGrupo)" v-for="(grupo,idxGrupo) in compras.grupos"
+                        style="margin:10px 0px; cursor: pointer;">
                         <div class="headGrupo">
                             <div style="display: inline;">
                                 <button v-on:click="novoItem(compras,idxGrupo)" class="btnNovoGrupo">+</button>
                             </div>
-                           
-                            <!-- <div v-on:click="grupo.selected=!grupo.selected" style="display:block;"> -->
-                                <div v-on:click="clickGrupo(grupo)" style="display:block;">
+                            <div v-on:click="clickGrupo(grupo)" style="display:block;">
                                 {{grupo.descricao}}
                                 <span class="totalGrupo">
-                                    R$ {{grupo.itens.reduce((soma, iten) => { return soma + (iten.preco * iten.qtd)},0).toFixed(2)}}
+                                    R$ {{grupo.itens.reduce((soma, iten) => { return soma + (iten.preco *
+                                    iten.qtd)},0).toFixed(2)}}
                                 </span>
                             </div>
                         </div>
@@ -62,7 +61,8 @@
                                         <div class="quantidade">{{(item.qtd)}} {{item.unidade}}</div>
                                         <div class="preco">R$ {{item.preco}}</div>
                                         <div class="totalItem">R$ {{(item.qtd * item.preco).toFixed(2)}}</div>
-                                        <div v-on:click="botaoExcluirItem(idxLista,idxGrupo,idxItem)" class="botaoExcluir"><button class="delete">ttx</button></div>
+                                        <div v-on:click="botaoExcluirItem(idxLista,idxGrupo,idxItem)"
+                                            class="botaoExcluir"><button class="delete">ttx</button></div>
                                     </div>
                                 </li>
                             </ul>
