@@ -1,0 +1,108 @@
+:root {
+  --branco: #faebdc;
+  --azul: #4da1eb;
+  --bebe: #3cdede;
+  --laranja: #f56336;
+  --verde: #34eb8e;
+
+  --roxo:#a434ff;
+
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.painel {
+  margin: 0 auto;
+  width: max(450px, 60vw);
+}
+
+li {
+    list-style: none;
+    clear: both;
+}
+
+ul{
+    padding:0px;
+}
+
+#btnNovaLista {
+  background: transparent;
+  border: 1px solid;
+  padding: 3px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+}
+
+.btnNovoGrupo {
+  border: none;
+  background: none;
+  padding: 5px;
+  border-right: 2px solid white;
+  font-weight: bolder;
+  font-size: 12px;
+  float:left;
+}
+
+#btnNovaLista:hover {
+  box-shadow: -1px -1px 2px;
+}
+.totalItem,
+.preco,
+.quantidade {
+  width: 30%;
+  float: left;
+}
+
+.botaoexcluir {
+  width: 10%;
+  float: left;
+}
+.descricao {
+  padding-left: 5px;
+}
+
+.direita {
+  float: right;
+  width: 50%;
+}
+
+.linhaItem {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.linhaItem:hover {
+  opacity: 1;
+  font-weight: 700;
+}
+
+.totalGrupo,
+.total {
+  float: right;
+}
+
+.selected {
+  display: none;
+}
+
+.header{
+    text-align: right;
+    background-color: #a434ff;
+    padding: 5px;
+}
+
+.headGrupo {
+    font-weight: bolder;
+    background: #f9ff87;
+}
+
+.headerGrupo{
+    cursor: pointer;
+    text-align: center;
+    padding:3px;
+    background-color: #3CDEDE;
+}
