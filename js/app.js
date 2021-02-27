@@ -104,12 +104,13 @@ var app = new Vue({
         clickGrupo(grupo){
 
 
-            console.log(grupo)
-            if(grupo)
-            {
+
+
             // this.dados[this.idListaEdit].grupos[this.newItem].itens[this.mIndex].descricao
 
              grupo.selected = !grupo.selected
+
+             console.log(grupo.selected)
 
             // // let y = !grupo.selected
 
@@ -119,7 +120,6 @@ var app = new Vue({
             //         console.log(itens.selected)
             //     })     
             // })
-        }
         },
         botaoExcluirItem(idxLista,idxGrupo,idXItem){
 
@@ -131,10 +131,23 @@ var app = new Vue({
 
             this.gravaLocalStorage()
 
+        },
+        removeGrupo(idxLista,idxGrupo){
+            this.dados[idxLista].grupos.splice(idxGrupo,1)
+            this.gravaLocalStorage()
+        },
+        removeLista(idxLista){
+            console.log(idxLista)
+
+            this.dados.splice(idxLista,1)
+            this.gravaLocalStorage()
         }
 
+
     }
-  })
+}
+  )
+
 
       //     {
     //         "descricao": "Despesa Fev21",

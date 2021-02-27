@@ -6,14 +6,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listas</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            clear: both;
+            font-size: 16px;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .flex-container2 {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+        .flex-container3 {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+        }
+
+        .flex-item {
+            padding: 5px;
+        }
+
+        li {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .headerGrupo {
+            background-color: rgb(95, 247, 36);
+        }
+
+        #app {
+            /* width: max(450px, 60vw); */
+            width: max(60vw, 360px);
+            margin: 0 auto;
+        }
+
+        .direita {
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="app" class="painel">
-        <div v-if="newItem===null" class="painel" style="margin:10px 0px">
-            <div class="header">
-                <button id="btnNovaLista" v-if="!novaLista" v-on:click="novaLista=true">+ Lista</button>
+    <div id="app" class="flex-container">
+        <div class="painel" v-if="newItem===null">
+            <div class="flex-item">
+                <div class="flex-container2" v-if="!novaLista">
+                    <div class="flex-item">Listas </div>
+                    <div class="flex-item" v-on:click="novaLista=true">+ Lista</div>
+                </div>
                 <span v-else>
                     <label>Nova Lista: </label>
                     <input v-model="descricaoLista" type="text" class="input">
@@ -21,56 +71,68 @@
                     <button v-on:click="novaLista=false;descricaoLista=null">Cancelar</button>
                 </span>
             </div>
-            <ul v-for="(compras,idxLista) in dados" style="margin:10px 0px;">
-                <li>
-                    <div class="headerGrupo">
-                        <span class="btnNovoGrupo" v-if="!compras.novoGrupo"
-                            v-on:click="compras.novoGrupo=true">+</span>
-                        <div v-on:click="compras.selected=!compras.selected;">
-                            {{compras.descricao}} <span class="total">R$ {{totalGrupos(compras).toFixed(2)}}</span>
+
+            <uL v-for="(lista,idxLista) in dados" class="flex-item">
+                <div class="flex-item" style="background-color: DodgerBlue; color:white; font-weight: bolder;">
+                    <div class="flex-container2">
+                        <div class="flex-item" v-if="!lista.novoGrupo" v-on:click="lista.novoGrupo=true"> + </div>
+                        <div class="flex-item" v-on:click="lista.selected = !lista.selected">
+                            {{lista.descricao}}
+                        </div>
+                        <div class="flex-item">
+                            <div class="flex-container3">
+                                <div class="flex-item">R$ {{totalGrupos(lista).toFixed(2)}}</div>
+                                <div class="flex-item" v-if="!lista.selected" v-on:click="removeLista(idxLista)">X</div>
+                            </div>
                         </div>
                     </div>
-                    <span v-if="compras.novoGrupo">
-                        <label>Novo grupo:</label>
-                        <input v-model="mDescricao" type="text" class="input">
-                        <button v-on:click="gravarNovoGrupo(idxLista)" class="button is-success">Gravar</button>
-                        <button v-on:click="compras.novoGrupo=false; mDescricao=null"
-                            class="button is-danger">Cancelar</button>
-                    </span>
-                    <!--  -->
-                    <ul v-if="(compras.selected && !compras.novoGrupo)" v-for="(grupo,idxGrupo) in compras.grupos"
-                        style="margin:10px 0px; cursor: pointer;">
-                        <div class="headGrupo">
-                            <div style="display: inline;">
-                                <button v-on:click="novoItem(compras,idxGrupo)" class="btnNovoGrupo">+</button>
-                            </div>
-                            <div v-on:click="clickGrupo(grupo)" style="display:block;">
-                                {{grupo.descricao}}
-                                <span class="totalGrupo">
+                </div>
+                <div class="flex-item" v-if="lista.novoGrupo">
+                    <label>Novo grupo:</label>
+                    <input v-model="mDescricao" type="text" class="input">
+                    <button v-on:click="gravarNovoGrupo(idxLista)" class="button is-success">Gravar</button>
+                    <button v-on:click="lista.novoGrupo=false; mDescricao=null"
+                        class="button is-danger">Cancelar</button>
+                </div>
+                <li v-if="(!lista.selected)" v-for="(grupo,idxGrupo) in lista.grupos">
+                    <div class="flex-container2 headerGrupo">
+                        <div class="flex-item" v-on:click="novoItem(lista,idxGrupo)">+</div>
+                        <div class="flex-item" v-on:click=" grupo.selected = !grupo.selected">{{grupo.descricao}}</div>
+                        
+
+                        <div class="flex-item">
+                            <div class="flex-container3">
+                                <div class="flex-item">
                                     R$ {{grupo.itens.reduce((soma, iten) => { return soma + (iten.preco *
-                                    iten.qtd)},0).toFixed(2)}}
-                                </span>
+                                     iten.qtd)},0).toFixed(2)}}
+                                 </div>
+                                <div class="flex-item" v-if="!grupo.selected" v-on:click="removeGrupo(idxLista,idxGrupo)">X</div>
                             </div>
                         </div>
-                        <li style="cursor: pointer; margin:5px 0px">
-                            <ul v-bind:class="{ selected: grupo.selected }" style="width: 100%;">
-                                <li style="margin-bottom: 10px;" v-for="(item,idxItem) in grupo.itens">
-                                    <span class="descricao" v-on:click="editarItem(idxLista,idxGrupo,item)">
-                                        {{item.descricao}}</span>
-                                    <div class="direita">
-                                        <div class="quantidade">{{(item.qtd)}} {{item.unidade}}</div>
-                                        <div class="preco">R$ {{item.preco}}</div>
-                                        <div class="totalItem">R$ {{(item.qtd * item.preco).toFixed(2)}}</div>
-                                        <div v-on:click="botaoExcluirItem(idxLista,idxGrupo,idxItem)"
-                                            class="botaoExcluir"><button class="delete">ttx</button></div>
+
+                    </div>
+                    <ul v-if="!grupo.selected">
+                        <li v-for="(item,idxItem) in grupo.itens">
+                            <div class="flex-container2">
+                                <div width="50%" class="flex-item" v-on:click="editarItem(idxLista,idxGrupo,item)">
+                                    {{item.descricao}}</div>
+
+                                <div class="flax-item">
+                                    <div class="flex-container2">
+                                        <div class="flex-item direita">{{item.qtd}} {{item.unidade}}</div>
+                                        <div class="flex-item">R$ {{item.preco}}</div>
+                                        <div class="flex-item">R$ {{(item.qtd * item.preco).toFixed(2)}}</div>
+                                        <div class="flex-item" v-on:click="botaoExcluirItem(idxLista,idxGrupo,idxItem)">
+                                            - </div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </li>
-            </ul>
+            </uL>
         </div>
+
         <div class="painel" v-else>
 
             <table>
