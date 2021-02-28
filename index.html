@@ -54,6 +54,19 @@
         .direita {
             text-align: right;
         }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        .fade-enter,
+        .fade-leave-to
+
+        /* .fade-leave-active em versões anteriores a 2.1.8 */
+            {
+            opacity: 0;
+        }
     </style>
 </head>
 
@@ -65,18 +78,18 @@
                     <div class="flex-item">Listas </div>
                     <div class="flex-item" v-on:click="novaLista=true">+ Lista</div>
                 </div>
-                <div class="flex-container"  style="align-items: center; background-color: DodgerBlue" v-else>
+                <div class="flex-container" style="align-items: center; background-color: DodgerBlue" v-else>
                     <div class="flex-item">
                         <label>Nova Lista: </label>
                         <input v-model="descricaoLista" type="text" class="input">
                     </div>
                     <div class="flex-item">
-                    <button v-on:click="gravarNovaLista">Gravar</button>
-                    <button v-on:click="novaLista=false;descricaoLista=null">Cancelar</button>
-                </div>
+                        <button v-on:click="gravarNovaLista">Gravar</button>
+                        <button v-on:click="novaLista=false;descricaoLista=null">Cancelar</button>
+                    </div>
                 </div>
             </div>
-
+            <transition name="fade">
             <uL v-show="!novaLista" v-for="(lista,idxLista) in dados" class="flex-item">
 
                 <div class="flex-item" style="background-color: DodgerBlue; color:white; font-weight: bolder;">
@@ -95,13 +108,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-item" v-if="lista.novoGrupo">
-                    <label>Novo grupo:</label>
-                    <input v-model="mDescricao" type="text" class="input">
-                    <button v-on:click="gravarNovoGrupo(idxLista)" class="button is-success">Gravar</button>
-                    <button v-on:click="lista.novoGrupo=false; mDescricao=null"
-                        class="button is-danger">Cancelar</button>
-                </div>
+
+                    <div class="flex-item" v-if="lista.novoGrupo">
+                        <label>Novo grupo:</label>
+                        <input v-model="mDescricao" type="text" class="input">
+                        <button v-on:click="gravarNovoGrupo(idxLista)" class="button is-success">Gravar</button>
+                        <button v-on:click="lista.novoGrupo=false; mDescricao=null"
+                            class="button is-danger">Cancelar</button>
+                    </div>
+  
                 <li v-show="!lista.selected" v-for="(grupo,idxGrupo) in lista.grupos">
                     <div class="flex-container2 headerGrupo">
                         <div class="flex-item" v-on:click="novoItem(lista,idxGrupo)">+</div>
@@ -138,6 +153,7 @@
                     </ul>
                 </li>
             </uL>
+            </transition>
         </div>
 
         <div class="painel" v-else>
