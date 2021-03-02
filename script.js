@@ -68,7 +68,7 @@ const garvaTransaction = (name, amount) =>{
         amount: Number(amount)})
 
     init()
-}
+
 
 form.addEventListener('submit', event => {
     event.preventDefault()
