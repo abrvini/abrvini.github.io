@@ -1,67 +1,3 @@
-// const dados = [
-//     {
-//         descricao:"Lista C0ompras",
-//         novoGrupo:false,
-//         selected:false,
-//         grupos:[{
-//             descricao:"Merceria",
-//             selected:true,
-//             itens:[{
-//                 descricao:"Arroz",
-//                 qtd:10,
-//                 unidade:"KG",
-//                 preco:4.56
-//             },{
-//                 descricao:"Feijão",
-//                 qtd:4,
-//                 unidade:"LT",
-//                 preco:5.78
-//             },{
-//                 descricao:"Leite",
-//                 qtd:10,
-//                 unidade:"LT",
-//                 preco:3.45
-//             }]
-//         },{
-//             descricao:"Limpeza",
-//             selected:true,
-//             itens:[{
-//                 descricao:"Detergente",
-//                 qtd:4,
-//                 unidade:"UN",
-//                 preco:1.75
-//             }]
-//         }]
-//     },{
-//         descricao:"Feira",
-//         novoGrupo:false,
-//         selected:false,
-//         grupos:[{
-//             descricao:"Verduras",
-//             selected:true,
-//             itens:[{
-//                 descricao:"Alface",
-//                 qtd:2,
-//                 unidade:"UN",
-//                 preco:2.00
-//             },{
-//                 descricao:"Rucula",
-//                 qtd:1,
-//                 unidade:"UN",
-//                 preco:2.40
-//             }]
-//         },{
-//             descricao:"Frutas",
-//             selected:true,
-//             itens:[{
-//                 descricao:"Banana",
-//                 qtd:1,
-//                 unidade:"UN",
-//                 preco:7.89
-//             }]
-//         }]
-//     }]
-
 let dados = []
 
 const gravaListasLocalStorage = () => localStorage.listas = JSON.stringify(dados)
@@ -121,18 +57,25 @@ const inserirHeaderLista = (idxLista,lista) => {
     h4El2.textContent = '$ ' +  totalizaLista(lista).toFixed(2)
 
     div2.append(h4El2)
+    div2.classList.add('teste')
+    
+    const btnNovoGrupo = document.createElement('I')
 
-    const btnNovoGrupo = document.createElement('BUTTON')
+    btnNovoGrupo.classList.add('fa')
+    btnNovoGrupo.classList.add('fa-plus')
     btnNovoGrupo.classList.add('delete-btn')
-    btnNovoGrupo.setAttribute('onclick',`addGrupo(${idxLista})`)
-    btnNovoGrupo.innerHTML = '<i class="fa fa-plus" style="font-size:16px; color:#fff;" aria-hidden="true"></i>'
-    btnNovoGrupo.style.background = 'inherit'
 
-    const bntDelete = document.createElement('BUTTON')
+    btnNovoGrupo.setAttribute('onclick',`addGrupo(${idxLista})`)
+    btnNovoGrupo.style.color ='#fff'
+
+    const bntDelete = document.createElement('I')
+
     bntDelete.classList.add('delete-btn')
+    bntDelete.classList.add('fa')
+    bntDelete.classList.add('fa-trash-o')
+
     bntDelete.setAttribute('onclick',`removeLista(${idxLista})`)
-    bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:#fff;" aria-hidden="true"></i>'
-    bntDelete.style.background = 'inherit'
+    bntDelete.style.color = '#fff'
 
     const bntEditar = document.createElement('BUTTON')
     bntEditar.classList.add('delete-btn')
@@ -175,17 +118,24 @@ const inserirHeaderGrupo = (idxLista,divGrupos,grupos) => {
         const h4El2= document.createElement('H4')
         h4El2.textContent = '$ ' + totalizaGrupo(grupo)
 
-        const bntDelete = document.createElement('BUTTON')
+        const bntDelete = document.createElement('I')
+
         bntDelete.classList.add('delete-btn')
+        bntDelete.classList.add('fa')
+        bntDelete.classList.add('fa-trash-o')
+
         bntDelete.setAttribute('onclick',`removeGrupo(${idxLista},${index})`)
-        // bntDelete.textContent = "X"
-        bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:#de4a4a;" aria-hidden="true"></i>'
-        bntDelete.style.background = 'inherit'
-        const bntNovoItem = document.createElement('BUTTON')
+
+        bntDelete.style.color = '#de4a4a'
+
+        const bntNovoItem = document.createElement('I')
+
         bntNovoItem.classList.add('delete-btn')
+        bntNovoItem.classList.add('fa')
+        bntNovoItem.classList.add('fa-plus')
+
         bntNovoItem.setAttribute('onclick',`addItem(${idxLista},${index})`)
-        bntNovoItem.innerHTML = '<i class="fa fa-plus" style="font-size:16px; color:#de4a4a;" aria-hidden="true"></i>'
-        bntNovoItem.style.background = 'inherit'
+        bntNovoItem.style.color = '#de4a4a'
     
         const bntEditar = document.createElement('BUTTON')
         bntEditar.classList.add('delete-btn')
@@ -199,6 +149,7 @@ const inserirHeaderGrupo = (idxLista,divGrupos,grupos) => {
         div1.style.flex = 1
 
         div2.append(h4El2)
+        div2.classList.add('teste')
        
         divHeaderGrupo.append(div1)
         divHeaderGrupo.append(div2)
@@ -233,19 +184,26 @@ const inserirItemDOM = (idxLista,idxGrupo, divGrupo,itens) => {
     const spanPreco = document.createElement('SPAN')
     const spanTotalItem = document.createElement('SPAN')
 
-    const bntDelete = document.createElement('BUTTON')
+    const bntEditar = document.createElement('I')
+    bntEditar.classList.add('fa')
+    bntEditar.classList.add('fa-pencil-square-o')
+    bntEditar.classList.add('delete-btn')
+
+    bntEditar.setAttribute('onclick',`editItem(${idxLista},${idxGrupo},${index})`)
+    bntEditar.style.color = 'black'
+
+    const bntDelete = document.createElement('I')
+    bntDelete.classList.add('fa')
+    bntDelete.classList.add('fa-trash-o')
+    
     bntDelete.classList.add('delete-btn')
     bntDelete.setAttribute('onclick',`removeItem(${idxLista},${idxGrupo},${index})`)
-    bntDelete.textContent = "X"
-    bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:black;" aria-hidden="true"></i>'
-    bntDelete.style.background = 'inherit'
+    bntDelete.style.color = 'black'
+    
 
-    const bntEditar = document.createElement('BUTTON')
-    bntEditar.classList.add('delete-btn')
-    bntEditar.setAttribute('onclick',`editItem(${idxLista},${idxGrupo},${index})`)
-    bntEditar.textContent = "#"
-    bntEditar.innerHTML = '<i class="fa fa-pencil-square-o" style="font-size:16px; color:black;" aria-hidden="true"></i>'
-    bntEditar.style.background = 'inherit'
+
+
+
 
     divItem_1_1.innerHTML += item.descricao
 
@@ -256,11 +214,13 @@ const inserirItemDOM = (idxLista,idxGrupo, divGrupo,itens) => {
     divItem_1_2.append(spanQtdUn)
     divItem_1_2.append(spanPreco)
     divItem_1_2.append(spanTotalItem)
-    divItem_1_2.append(bntEditar)
-    divItem_1_2.append(bntDelete)
+    // divItem_1_2.append(bntEditar)
+    // divItem_1_2.append(bntDelete)
 
     divItem.append(divItem_1_1)
     divItem.append(divItem_1_2)
+    divItem.append(bntEditar)
+    divItem.append(bntDelete)
     divItens.append(divItem)
 })
 divGrupo.append(divItens)
@@ -309,6 +269,16 @@ const limpaForm2 = ()=>{
 form2.addEventListener('submit', event => {
     event.preventDefault()
 
+    if(iDescricao.value.trim() === ''){
+            modal.innerHTML += 'Informe todos os dados'
+            modal.style.textAlign = 'center'
+            modal.style.border = '1px solid red'
+            modal.style.display ='block'
+            modal.style.padding = '5px'
+            modal.style.background ='#ffc04e'
+        return
+    }
+
     if(btnFrm2.value === 'null')
     {
      
@@ -350,8 +320,12 @@ form.addEventListener('submit', event => {
     const precoEl = document.querySelector("#preco")
 
     if(Number(precoEl.value) === 0){
-        modal.innerHTML += 'Defina o preço'
+        modal.innerHTML += 'Informe todos os dados'
+        modal.style.textAlign = 'center'
+        modal.style.border = '1px solid red'
         modal.style.display ='block'
+        modal.style.padding = '5px'
+        modal.style.background ='#ffc04e'
         return
     }
    
@@ -477,6 +451,11 @@ const renderizaLista = () =>{
     dados.forEach((lista,index) => {
         inserirHeaderLista(index,lista)
     })
+
+    if(dados.length < 1)
+    {
+        addLista()
+    }
 }
 
 renderizaLista()

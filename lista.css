@@ -29,7 +29,7 @@ body {
 }
 .geral{
   margin: 5px auto;
-  width: 460px;
+  width: 500px;
   max-width: 60ch;
 }
 
@@ -63,6 +63,7 @@ body {
   cursor: pointer;
   flex: 1;
   display: flex;
+  margin-right: 5px;
 }
 
 .headerLista{
@@ -95,16 +96,27 @@ body {
   display:block;
 } 
 
+.headerLista:hover .teste,
+.headerGrupo:hover .teste
+{
+  flex:1;
+} 
 .delete-btn {
   cursor: pointer;
-  background-color:#de4a4a;
-  border: 0;
+  /* background-color:inherit; */
+  font-size: 16px;
+  /* line-height:24px; */
+  /* border: 0; */
   color: #fff;
-  padding: 2px 5px;
+  /* padding: 2px 5px; */
   display:none;
-  margin-left: 2px;
+  /* margin-left: 2px; */
+  vertical-align: center;
 }
 
+i{
+
+}
 input[type='text'],
 input[type='number'], select {
   border: 1px solid #fbfbfb;
@@ -155,6 +167,10 @@ input[type='number'], select {
   border-radius: 100px;
 }
 
-fa:hover{
-  text-shadow: #333;
+.fa:hover{
+  color: red;
+}
+
+.fa{
+  margin:0px 6px;
 }
