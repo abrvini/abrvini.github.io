@@ -97,7 +97,7 @@ body {
 
 .delete-btn {
   cursor: pointer;
-  background-color: #de4a4a;
+  background-color:#de4a4a;
   border: 0;
   color: #fff;
   padding: 2px 5px;
@@ -120,6 +120,7 @@ input[type='number'], select {
 }
 .btn-cancelar{
   background-color: #de4a4a;
+  
 }
 
 .btn {
@@ -144,12 +145,16 @@ input[type='number'], select {
   cursor: pointer;
   background-color: transparent;
   border: 0;
-  color: #de4a4a;
-  font-size: 35px;
+  /* color: #de4a4a; */
+  font-size: 25px;
   line-height: 20px;
   padding: 10px 15px;
   position: absolute;
   top: 0px;
   /* right: 170px; */
   border-radius: 100px;
+}
+
+fa:hover{
+  text-shadow: #333;
 }

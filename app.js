@@ -125,12 +125,14 @@ const inserirHeaderLista = (idxLista,lista) => {
     const btnNovoGrupo = document.createElement('BUTTON')
     btnNovoGrupo.classList.add('delete-btn')
     btnNovoGrupo.setAttribute('onclick',`addGrupo(${idxLista})`)
-    btnNovoGrupo.textContent = "+"
+    btnNovoGrupo.innerHTML = '<i class="fa fa-plus" style="font-size:16px; color:#fff;" aria-hidden="true"></i>'
+    btnNovoGrupo.style.background = 'inherit'
 
     const bntDelete = document.createElement('BUTTON')
     bntDelete.classList.add('delete-btn')
     bntDelete.setAttribute('onclick',`removeLista(${idxLista})`)
-    bntDelete.textContent = "X"
+    bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:#fff;" aria-hidden="true"></i>'
+    bntDelete.style.background = 'inherit'
 
     const bntEditar = document.createElement('BUTTON')
     bntEditar.classList.add('delete-btn')
@@ -176,12 +178,14 @@ const inserirHeaderGrupo = (idxLista,divGrupos,grupos) => {
         const bntDelete = document.createElement('BUTTON')
         bntDelete.classList.add('delete-btn')
         bntDelete.setAttribute('onclick',`removeGrupo(${idxLista},${index})`)
-        bntDelete.textContent = "X"
-
+        // bntDelete.textContent = "X"
+        bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:#de4a4a;" aria-hidden="true"></i>'
+        bntDelete.style.background = 'inherit'
         const bntNovoItem = document.createElement('BUTTON')
         bntNovoItem.classList.add('delete-btn')
         bntNovoItem.setAttribute('onclick',`addItem(${idxLista},${index})`)
-        bntNovoItem.textContent = "+"
+        bntNovoItem.innerHTML = '<i class="fa fa-plus" style="font-size:16px; color:#de4a4a;" aria-hidden="true"></i>'
+        bntNovoItem.style.background = 'inherit'
     
         const bntEditar = document.createElement('BUTTON')
         bntEditar.classList.add('delete-btn')
@@ -233,11 +237,15 @@ const inserirItemDOM = (idxLista,idxGrupo, divGrupo,itens) => {
     bntDelete.classList.add('delete-btn')
     bntDelete.setAttribute('onclick',`removeItem(${idxLista},${idxGrupo},${index})`)
     bntDelete.textContent = "X"
+    bntDelete.innerHTML = '<i class="fa fa-trash-o" style="font-size:16px; color:black;" aria-hidden="true"></i>'
+    bntDelete.style.background = 'inherit'
 
     const bntEditar = document.createElement('BUTTON')
     bntEditar.classList.add('delete-btn')
     bntEditar.setAttribute('onclick',`editItem(${idxLista},${idxGrupo},${index})`)
     bntEditar.textContent = "#"
+    bntEditar.innerHTML = '<i class="fa fa-pencil-square-o" style="font-size:16px; color:black;" aria-hidden="true"></i>'
+    bntEditar.style.background = 'inherit'
 
     divItem_1_1.innerHTML += item.descricao
 
@@ -464,21 +472,11 @@ const removeLista = (index) =>{
 
 const renderizaLista = () =>{
     lerListasLocalStorge()
-    geral.innerHTML = '<button onclick="addLista()" class="plus-btn">+</button>'
+    geral.innerHTML = '<i onclick="addLista()" class="fa fa-calendar-plus-o plus-btn" aria-hidden="true"></i>'
+    // '<button onclick="addLista()" class="plus-btn">+</button>'
     dados.forEach((lista,index) => {
         inserirHeaderLista(index,lista)
     })
-    
-    // if(geral.innerHTML === '')
-    // {
-    //     form2.style.display = 'block'
-    //     geral.style.display ='none'
-    //     DescHeader.innerHTML = 'Nova Lista'
-    //     btnFrm2.value = null
-
-    // }
-
-
 }
 
 renderizaLista()
